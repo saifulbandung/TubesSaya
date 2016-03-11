@@ -9,11 +9,9 @@ package orang;
  *
  * @author HP
  */
-public class Orang {
-
-    /**
-     * @param args the command line arguments
-     */
-    
+public class Main {
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
     
 }
