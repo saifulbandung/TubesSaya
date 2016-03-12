@@ -9,6 +9,67 @@ package orang;
  *
  * @author HP
  */
-public class Asisten {
+public class Asisten extends Orang{
+    private TugasBesar [] tugasbesar;
+    private int numofTugasBesar;
+    private String pass;
+    private int id;
+    private int maxTugasBesar;
+    
+    public Asisten(String nama,String jenisKel, int umur,int maxTugasBesar){
+        super(nama,jenisKel,umur);
+        this.maxTugasBesar=maxTugasBesar;
+        tugasbesar= new TugasBesar[maxTugasBesar];
+    }
+    public void createTugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){  
+        tugasbesar[numofTugasBesar]= new TugasBesar(judul,maxMahasiswa,maxDokumentasi);
+       // tugasbesar[numofTugasBesar].setJudul(judul);
+        numofTugasBesar++;
+    }
+    
+    public void tambahMahasiswa(String judul, String nama, String jenisKel, int umur){
+        int i;
+        for(i=0;i<maxTugasBesar;i++){     
+            if(tugasbesar[i].getJudul()==judul){
+                tugasbesar[i].addMember(nama, jenisKel, umur);
+                System.out.println("tambah Mahasiswa berhasil");
+            }
+        }
+    }    
+    public void kurangMahasiswa(String judul,String nama,int id){
+        int i;
+        for(i=0;i<numofTugasBesar;i++){
+            if(tugasbesar[i].getJudul()==judul){
+               int x;
+                for(x=0;x<tugasbesar[i].getNumofMahasiswa();x++){
+                    if(tugasbesar[i].getMahasiswa(x).getId()==id){          
+                        System.out.print("Nama :"+tugasbesar[i].getMahasiswa(x).getNama());
+                        tugasbesar[i].hapusMahasiswa(x);
+                        System.out.println(" data telah terhapus");
+                    }
+                }
+            }
+        }
+    }
+    public void setId(int id){
+        this.id=id;
+    }
+    public int getId(){
+         return id;
+    }
+    public void setPass(String pass){
+    this.pass=pass;
+    }
+    public String getPass(){
+        return pass;
+    }
+    public int getnumTugasBesar(){
+        return numofTugasBesar;
+    }
+    public TugasBesar getTugasBesar(int q){
+        return tugasbesar[q];
+    }
+        
+    
     
 }
