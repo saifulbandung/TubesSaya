@@ -10,7 +10,6 @@ package orang;
  * @author HP
  */
 public abstract class Orang {
-
     /**
      * @param args the command line arguments
      */
