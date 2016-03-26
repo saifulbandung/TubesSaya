@@ -15,24 +15,34 @@ public class Asisten extends Orang{
     private String pass;
     private int id;
     private int maxTugasBesar;
+    private boolean cekCreateTugasBesar=false;
     
     public Asisten(String nama,String jenisKel, int umur,int maxTugasBesar){
         super(nama,jenisKel,umur);
         this.maxTugasBesar=maxTugasBesar;
         tugasbesar= new TugasBesar[maxTugasBesar];
     }
-    public void createTugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){  
+    public void createTugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){
+        
+        if(numofTugasBesar<maxTugasBesar){
         tugasbesar[numofTugasBesar]= new TugasBesar(judul,maxMahasiswa,maxDokumentasi);
        // tugasbesar[numofTugasBesar].setJudul(judul);
         numofTugasBesar++;
+        cekCreateTugasBesar=true;
+        }else{
+            System.out.println("maaf anda hanya bisa mengajukan "+maxTugasBesar+"judul anda telah memnuhi kuota");
+            cekCreateTugasBesar=false;
+        }
     }
     
     public void tambahMahasiswa(String judul, String nama, String jenisKel, int umur){
         int i;
-        for(i=0;i<maxTugasBesar;i++){     
-            if(tugasbesar[i].getJudul()==judul){
+        for(i=0;i<maxTugasBesar;i++){ 
+            if(tugasbesar[i]!=null){
+            if(tugasbesar[i].getJudul().equals(judul)){
                 tugasbesar[i].addMember(nama, jenisKel, umur);
-                System.out.println("tambah Mahasiswa berhasil");
+               // System.out.println("tambah Mahasiswa berhasil");
+            }
             }
         }
     }    
@@ -69,6 +79,18 @@ public class Asisten extends Orang{
     public TugasBesar getTugasBesar(int q){
         return tugasbesar[q];
     }
+    public void setmaxTugasBesar(int maxTugasBesar){
+        this.maxTugasBesar=maxTugasBesar;
+    }
+    public int getmaxTugasBesar(){
+        return maxTugasBesar;
+    }
+    public boolean getCekCreteTugasBesar(){
+        return cekCreateTugasBesar;
+    }
+
+    
+      
         
     
     

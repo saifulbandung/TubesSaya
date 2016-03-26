@@ -14,9 +14,10 @@ public class TugasBesar {
     private Mahasiswa [] member;
     private String judul;
     private int numofDokumentasi;
-    private int numofMahasiswa;
+    private int numofMahasiswa=0;
     private int maxDokumentasi;
     private int maxMahasiswa;
+    private boolean sucessaddMhs=false;
     
     public TugasBesar(){}
     public TugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){
@@ -35,8 +36,18 @@ public class TugasBesar {
         if(numofMahasiswa<maxMahasiswa){
         member[numofMahasiswa]=new Mahasiswa(nama,jenisKel,umur);
         numofMahasiswa++;
+        sucessaddMhs=true;
+        }else if(numofMahasiswa==maxMahasiswa){
+            for(int i=1;i<=maxMahasiswa;i++){
+                if(member[i]==null){
+                    member[i]= new Mahasiswa(nama,jenisKel,umur);
+                    numofMahasiswa=i+1;
+                    sucessaddMhs=true;
+                }
+            }
         }else {
             System.out.println("maaf kelompok sudah penuh");
+            sucessaddMhs=false;
         }
     }
     
@@ -69,7 +80,9 @@ public class TugasBesar {
     public int getMaxDokumentasi(){
         return maxDokumentasi;
     }
-    
+    public boolean getSucessAddMhs(){
+        return sucessaddMhs;
+    }
     
     
 }

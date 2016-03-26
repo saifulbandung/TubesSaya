@@ -14,8 +14,10 @@ public class Mahasiswa extends Orang{
     private String pass;
     public  Mahasiswa(String nama, String jenisKel, int umur) {
         super(nama, jenisKel, umur);
+        super.getNama();
     }
     public void setId(int id){
+        
         this.id=id;
     }
     public int getId(){
@@ -27,8 +29,15 @@ public class Mahasiswa extends Orang{
     public String getPass(){
         return pass;
 }
-    
-    
+   /* public String getNama(){
+        return super.getNama();
+    }
+    public int getUmur(){
+        return super.getUmur();
+    }
+    public String getjenisKel(){
+        return super.getjenisKel();
+    }*/
 }
 
     
