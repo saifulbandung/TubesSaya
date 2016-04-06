@@ -17,8 +17,9 @@ public class Asisten extends Orang{
     private int maxTugasBesar;
     private boolean cekCreateTugasBesar=false;
     
-    public Asisten(String nama,String jenisKel, int umur,int maxTugasBesar){
-        super(nama,jenisKel,umur);
+    public Asisten(String nama,String jenisKel, int id,int maxTugasBesar){
+        super(nama,jenisKel);
+        this.id=id;
         this.maxTugasBesar=maxTugasBesar;
         tugasbesar= new TugasBesar[maxTugasBesar];
     }
@@ -35,12 +36,12 @@ public class Asisten extends Orang{
         }
     }
     
-    public void tambahMahasiswa(String judul, String nama, String jenisKel, int umur){
+    public void tambahMahasiswa(String judul, String nama, String jenisKel, int id){
         int i;
         for(i=0;i<maxTugasBesar;i++){ 
             if(tugasbesar[i]!=null){
             if(tugasbesar[i].getJudul().equals(judul)){
-                tugasbesar[i].addMember(nama, jenisKel, umur);
+                tugasbesar[i].addMember(nama, jenisKel, id);
                // System.out.println("tambah Mahasiswa berhasil");
             }
             }
@@ -48,17 +49,24 @@ public class Asisten extends Orang{
     }    
     public void kurangMahasiswa(String judul,String nama,int id){
         int i;
+        boolean cek=false;
         for(i=0;i<numofTugasBesar;i++){
             if(tugasbesar[i].getJudul()==judul){
                int x;
                 for(x=0;x<tugasbesar[i].getNumofMahasiswa();x++){
-                    if(tugasbesar[i].getMahasiswa(x).getId()==id){          
-                        System.out.print("Nama :"+tugasbesar[i].getMahasiswa(x).getNama());
-                        tugasbesar[i].hapusMahasiswa(x);
-                        System.out.println(" data telah terhapus");
+                    if(tugasbesar[i].getMahasiswa(x).getNama()==nama){
+                        if(tugasbesar[i].getMahasiswa(x).getId()==id){
+                            System.out.println("Nama :"+tugasbesar[i].getMahasiswa(x).getNama());
+                            tugasbesar[i].hapusMahasiswa(x);
+                            cek=true;
+                            System.out.println(" data telah terhapus ");
+                        }
                     }
                 }
             }
+        }
+        if(cek==false){
+            System.out.println("Data Gagal Dihapus NIM salah");
         }
     }
     public void setId(int id){
@@ -88,10 +96,7 @@ public class Asisten extends Orang{
     public boolean getCekCreteTugasBesar(){
         return cekCreateTugasBesar;
     }
-
-    
-      
-        
-    
-    
+    public String getnama(){
+        return super.getNama();
+    }
 }

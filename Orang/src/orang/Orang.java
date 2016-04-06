@@ -17,10 +17,10 @@ public abstract class Orang {
     private String jenisKel;
     private int umur;
     
-    public Orang (String nama, String jenisKel, int umur){
+    public Orang (String nama, String jenisKel){
         this.nama=nama;
         this.jenisKel=jenisKel;
-        this.umur=umur;
+        
     }
     public void setNama(String nama){
         this.nama=nama;
@@ -40,5 +40,4 @@ public abstract class Orang {
     int getUmur(){
         return umur;
     }
-    
 }

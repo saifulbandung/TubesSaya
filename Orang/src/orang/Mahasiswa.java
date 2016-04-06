@@ -12,9 +12,9 @@ package orang;
 public class Mahasiswa extends Orang{
     private int id;
     private String pass;
-    public  Mahasiswa(String nama, String jenisKel, int umur) {
-        super(nama, jenisKel, umur);
-        super.getNama();
+    public  Mahasiswa(String nama, String jenisKel, int id) {
+        super(nama, jenisKel);
+        this.id=id;
     }
     public void setId(int id){
         
@@ -29,7 +29,7 @@ public class Mahasiswa extends Orang{
     public String getPass(){
         return pass;
 }
-   /* public String getNama(){
+    public String getNama(){
         return super.getNama();
     }
     public int getUmur(){
@@ -37,7 +37,10 @@ public class Mahasiswa extends Orang{
     }
     public String getjenisKel(){
         return super.getjenisKel();
-    }*/
+    }
+    public void setUmur(int umur){
+        super.setUmur(umur);
+    }
 }
 
     

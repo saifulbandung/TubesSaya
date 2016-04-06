@@ -32,15 +32,15 @@ public class TugasBesar {
         dokumentasi[numofDokumentasi].setNamaDokumentasi(namaDokumentasi);
         numofDokumentasi++;
     }
-    public void addMember(String nama,String jenisKel,int umur){
+    public void addMember(String nama,String jenisKel,int id){
         if(numofMahasiswa<maxMahasiswa){
-        member[numofMahasiswa]=new Mahasiswa(nama,jenisKel,umur);
+        member[numofMahasiswa]=new Mahasiswa(nama,jenisKel,id);
         numofMahasiswa++;
         sucessaddMhs=true;
         }else if(numofMahasiswa==maxMahasiswa){
             for(int i=1;i<=maxMahasiswa;i++){
                 if(member[i]==null){
-                    member[i]= new Mahasiswa(nama,jenisKel,umur);
+                    member[i]= new Mahasiswa(nama,jenisKel,id);
                     numofMahasiswa=i+1;
                     sucessaddMhs=true;
                 }
@@ -51,13 +51,15 @@ public class TugasBesar {
         }
     }
     
-    public void hapusMahasiswa(int x){
-        member[x].setId(0);
-        member[x].setNama(null);
-        member[x].setPass(null);
-        member[x].setUmur(0);
-        member[x].setjenisKel(null);
-        member[x]=null;
+    public void hapusMahasiswa(int x){       
+        numofMahasiswa=numofMahasiswa-1;
+        while(member[x+1]!=null){
+            member[x]=member[x+1];
+            x++;
+        }
+        if(member[x]!=null){
+            member[x]=null;
+        }
     }
     public void setJudul(String judul){
         this.judul=judul;
