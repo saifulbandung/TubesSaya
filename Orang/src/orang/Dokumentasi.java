@@ -4,20 +4,20 @@
  * and open the template in the editor.
  */
 package orang;
+import java.util.Date;
 /**
  *
  * @author HP
  */
-public class Dokumentasi {
-    
+public class Dokumentasi {   
     private String namaDokumentasi;
-    private int tanggal; 
-    private int bulan;
-    private int tahun;
+    private Date tanggal; 
     private String isi;
     
-    public void setNamaDokumentasi(String namaDokumentasi){
+    public Dokumentasi(String namaDokumentasi,Date tanggal,String isi){
         this.namaDokumentasi=namaDokumentasi;
+        this.tanggal=tanggal;
+        this.isi=isi;
     }
     public String getNamaDokumentasi(){
         return namaDokumentasi;
@@ -28,24 +28,10 @@ public class Dokumentasi {
     public String getIsi(){
         return isi;
     }
-    public void setTanggal(int tanggal){
+    public void setTanggal(Date tanggal){
         this.tanggal=tanggal;
     }
-    public int getTanggal(){
+    public Date getTanggal(){
         return tanggal;
-    }
-    public void setBulan(int bulan){
-        this.bulan=bulan;
     } 
-    public int getBulan(){
-        return bulan;
-    }
-    public void setTahun(int tahun){
-        this.tahun=tahun;
-    }
-    public int getTahun(){
-        return tahun;
-    }
-    
-    
 }

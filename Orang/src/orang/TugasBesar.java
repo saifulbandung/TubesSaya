@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package orang;
-
+import java.util.Date;
 /**
  *
  * @author HP
@@ -13,23 +13,21 @@ public class TugasBesar {
     private Dokumentasi [] dokumentasi;
     private Mahasiswa [] member;
     private String judul;
-    private int numofDokumentasi;
+    private int numofDokumentasi=0;
     private int numofMahasiswa=0;
-    private int maxDokumentasi;
+    private int maxDokumentasi=10;
     private int maxMahasiswa;
     private boolean sucessaddMhs=false;
     
     public TugasBesar(){}
-    public TugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){
+    public TugasBesar(String judul,int maxMahasiswa){
         this.judul=judul;
-        this.maxDokumentasi=maxDokumentasi;
         this.maxMahasiswa=maxMahasiswa;
         dokumentasi= new Dokumentasi[maxDokumentasi];
         member = new Mahasiswa[maxMahasiswa];
     }
-    public void createDokumentasi(String namaDokumentasi){
-        dokumentasi[numofDokumentasi]=new Dokumentasi();
-        dokumentasi[numofDokumentasi].setNamaDokumentasi(namaDokumentasi);
+    public void createDokumentasi(String namaDokumentasi,Date tanggal,String isi){
+        dokumentasi[numofDokumentasi]=new Dokumentasi(namaDokumentasi,tanggal,isi);
         numofDokumentasi++;
     }
     public void addMember(String nama,String jenisKel,int id){
@@ -59,6 +57,7 @@ public class TugasBesar {
         }
         if(member[x]!=null){
             member[x]=null;
+            numofMahasiswa=numofMahasiswa-1;
         }
     }
     public void setJudul(String judul){

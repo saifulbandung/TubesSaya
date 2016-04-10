@@ -23,10 +23,10 @@ public class Asisten extends Orang{
         this.maxTugasBesar=maxTugasBesar;
         tugasbesar= new TugasBesar[maxTugasBesar];
     }
-    public void createTugasBesar(String judul,int maxMahasiswa,int maxDokumentasi){
+    public void createTugasBesar(String judul,int maxMahasiswa){
         
         if(numofTugasBesar<maxTugasBesar){
-        tugasbesar[numofTugasBesar]= new TugasBesar(judul,maxMahasiswa,maxDokumentasi);
+        tugasbesar[numofTugasBesar]= new TugasBesar(judul,maxMahasiswa);
        // tugasbesar[numofTugasBesar].setJudul(judul);
         numofTugasBesar++;
         cekCreateTugasBesar=true;
