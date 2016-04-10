@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Controler;
+
+
 import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import Model.Asisten;
 
 /**
  *
  * @author HP
  */
 public class ConsoleUI {
+    Asisten a;
     // data cuman baru 1 asisten dengan nama ahmad dan password 1234
     private int l;
     private int id;
@@ -40,9 +44,7 @@ public class ConsoleUI {
     private int kuota;
     private boolean menua;
     private boolean menum;
-   
-    //Asisten[] a= new Asisten[10];
-    //Mahasiswa[] m = new Mahasiswa[20];   
+      
     Scanner scan2 = new Scanner(System.in);
     Scanner scan3 = new Scanner(System.in);
     Scanner scan4 =new Scanner(System.in);
@@ -53,12 +55,14 @@ public class ConsoleUI {
         this.f=f;
     }
     public void menuLog(){       
-          input();
-//        show_all(l);
-   //     f.readFileAsisten();
+   //       input();     
+        f.readFileMahasiswa();
+        f.readFileAsisten();
+        show_all(l);
    //     f.saveFileAsisten();
-      //  show_Mahasiswa();
-        System.out.println(app.getMahasiswa(0).getNama());
+   //     f.saveFileMahasiswa();
+   //  show_Mahasiswa();
+        System.out.println(app.a[0]);
         while(true){
         try{  
         System.out.println("Menu ");
@@ -106,11 +110,8 @@ public class ConsoleUI {
            case 1:
             System.out.println("");
             System.out.println("Login Asisten");
-            System.out.println(nama);
             System.out.print("Name: ");
             nama = scan2.nextLine();
-            System.out.println(nama);
-            System.out.println(pass);
             System.out.print("Pass: ");
             pass = scan3.nextLine();
             System.out.println(pass);
@@ -168,8 +169,8 @@ public class ConsoleUI {
         menua=true;
         while(menua){
         System.out.print("Asisten ");
-        Asisten a1= (Asisten) app.getAsisten(i);
-        System.out.println(app.getAsisten(i).getNama()+" "+a1.getId());
+    //    Asisten a1= (Asisten) app.getAsisten(i);
+        System.out.println(app.getAsisten(i).getNama()+" "+app.getAsisten(i).getId());
         System.out.println("1.Tambah Judul tubes");
         System.out.println("2.Tambah Mahasiswa");
         System.out.println("3.Kurangi Mahasiswa");
@@ -659,9 +660,9 @@ public class ConsoleUI {
         app.getMahasiswa(2).setPass("1234");
         app.addMahasiswa("aqli","laki-laki",1301144003);
         app.getMahasiswa(3).setPass("1234");
-        app.addMahasiswa("azizah","perempuan",1301144004);
-        app.getMahasiswa(4).setPass("1234");
-        app.addMahasiswa("dono","laki-laki",1301144005);
-        app.getMahasiswa(5).setPass("1234");          
+     //   app.addMahasiswa("azizah","perempuan",1301144004);
+     //   app.getMahasiswa(4).setPass("1234");
+     //   app.addMahasiswa("dono","laki-laki",1301144005);
+     //   app.getMahasiswa(5).setPass("1234");          
         }
 }

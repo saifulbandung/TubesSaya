@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Model;
+
+import java.io.Serializable;
 
 /**
  *
  * @author HP
  */
-public class Asisten extends Orang{
+public class Asisten extends Orang implements Serializable{
     private TugasBesar [] tugasbesar;
     private int numofTugasBesar;
     private String pass;
@@ -96,7 +98,16 @@ public class Asisten extends Orang{
     public boolean getCekCreteTugasBesar(){
         return cekCreateTugasBesar;
     }
-    public String getnama(){
+    public String getNama(){
         return super.getNama();
+    }
+    public int getUmur(){
+        return super.getUmur();
+    }
+    public String getjenisKel(){
+        return super.getjenisKel();
+    }
+    public void setUmur(int umur){
+        super.setUmur(umur);
     }
 }

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Model;
+
+import java.io.Serializable;
 
 /**
  *
  * @author HP
  */
-public abstract class Orang {
+public abstract class Orang implements Serializable{
     /**
      * @param args the command line arguments
      */

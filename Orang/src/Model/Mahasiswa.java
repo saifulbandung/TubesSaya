@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Model;
+
+import java.io.Serializable;
 
 /**
  *
  * @author HP
  */
-public class Mahasiswa extends Orang{
+public class Mahasiswa extends Orang implements Serializable{
     private int id;
     private String pass;
     public  Mahasiswa(String nama, String jenisKel, int id) {

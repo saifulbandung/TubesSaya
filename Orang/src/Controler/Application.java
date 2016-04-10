@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Controler;
+
+import Model.Asisten;
+import Model.Mahasiswa;
+
 /**
  *
  * @author HP
@@ -13,6 +17,9 @@ public class Application {
      Mahasiswa[] m;
     private int numofAsisten=0;
     private int numofMahasiswa=0;
+    public Application(){
+        
+    }
     public Application(int e, int q){
         a = new Asisten[e];
         m = new Mahasiswa[q];

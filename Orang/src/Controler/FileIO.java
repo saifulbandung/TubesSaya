@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package orang;
+package Controler;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import Model.Asisten;
+import Model.Mahasiswa;
 
 public class FileIO {
     private Application app;
@@ -42,6 +44,7 @@ public class FileIO {
             System.out.println("cekk"+app.getAsisten(0).getNama());
         }catch(Exception e){
         }
+        
     }
     public void readFileMahasiswa(){
         try(ObjectInputStream omhs= new ObjectInputStream(new FileInputStream("Mahasiswa.txt"))){
