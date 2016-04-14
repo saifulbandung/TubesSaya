@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controler;
+package Model;
 
 
 import java.util.Scanner;
@@ -18,7 +18,7 @@ import Model.Asisten;
 public class ConsoleUI {
     Asisten a;
     // data cuman baru 1 asisten dengan nama ahmad dan password 1234
-    private int l;
+    private int l,i;
     private int id;
     private String pass;
     private String nama;
@@ -34,7 +34,7 @@ public class ConsoleUI {
     private int maxofMahasiswa;
     private String n[];
     private int pil2;
-    private boolean cek,cek1;
+    private boolean cek,cek1,cek2;
     private Date tanggal;
     private String namaDokumentasi;
     private String isi;
@@ -44,46 +44,48 @@ public class ConsoleUI {
     private int kuota;
     private boolean menua;
     private boolean menum;
+    private boolean cekregistrasim,ceklevel2,cek3;
       
     Scanner scan2 = new Scanner(System.in);
     Scanner scan3 = new Scanner(System.in);
     Scanner scan4 =new Scanner(System.in);
     Scanner scan5 =new Scanner(System.in);
     Scanner scan1 = new Scanner(System.in);
+    
     public ConsoleUI(Application app,FileIO f){
         this.app=app;
         this.f=f;
     }
     public void menuLog(){       
-   //       input();     
-        f.readFileMahasiswa();
-        f.readFileAsisten();
+          input();     
+    //    f.readFileMahasiswa();
+    //    f.readFileAsisten();
         show_all(l);
-   //     f.saveFileAsisten();
-   //     f.saveFileMahasiswa();
-   //  show_Mahasiswa();
-        System.out.println(app.a[0]);
+    //    f.saveFileAsisten();
+    //    f.saveFileMahasiswa();
+        show_Mahasiswa();
         while(true){
         try{  
-        System.out.println("Menu ");
-        System.out.println("1. Login Asisten");
-        System.out.println("2. Login Mahasiswa");
-        System.out.println("3. Registrasi Mahasiswa");
-        System.out.println("4. Registrasi Asisten");
-        System.out.println("5. exit");
-        System.out.print("Pilihlah: ");
-        l = scan1.nextInt();
-        menuLogin(l);}catch(Exception e){ 
+            System.out.println("Menu ");
+            System.out.println("1. Login Asisten");
+            System.out.println("2. Login Mahasiswa");
+            System.out.println("3. Registrasi Mahasiswa");
+            System.out.println("4. Registrasi Asisten");
+            System.out.println("5. exit");
+            System.out.print("Pilihlah: ");
+            l = scan1.nextInt();           
+        }catch(Exception e){ 
              System.out.println("inputan harus angka+++");
              scan1=new Scanner(System.in);
-             scan2=new Scanner(System.in);
-             scan3=new Scanner(System.in);
-             scan4=new Scanner(System.in);
-             scan5=new Scanner(System.in);
-            }}
+        }
+        menuLogin(l);
+        }
     }
     
-    public void MenuRegistrasiAsisten(){
+    public void menuRegistrasiAsisten(){
+        cekregistrasim=true;
+        while(cekregistrasim){
+            try{
         System.out.println("");
         System.out.println("===Menu Registrasi Asisten===");
         System.out.print("Nama: ");
@@ -103,35 +105,47 @@ public class ConsoleUI {
         app.getAsisten(q).setUmur(umur);
         app.getAsisten(q).setPass(pass);
         app.getAsisten(q).setjenisKel(jeniskel);
+        cekregistrasim=false;
+        f.saveFileAsisten();
+            }catch(Exception e){
+                System.out.println("Salah!!! cek data ");
+                scan1 = new Scanner(System.in);
+            }
+        }
         menuAsisten(q);
     }
     public void menuLogin(int l){
        switch(l){
            case 1:
-            System.out.println("");
-            System.out.println("Login Asisten");
-            System.out.print("Name: ");
-            nama = scan2.nextLine();
-            System.out.print("Pass: ");
-            pass = scan3.nextLine();
-            System.out.println(pass);
-            System.out.println();
-            cekAsisten(nama,pass);
+            cekregistrasim=true;
+            while(cekregistrasim){// akan di falskan di method cekAsisten
+                System.out.println("");
+                System.out.println("Login Asisten");
+                System.out.print("Name: ");
+                nama = scan2.nextLine();
+                System.out.print("Pass: ");
+                pass = scan3.nextLine();
+                System.out.println();
+                cekAsisten(nama,pass);
+            }
         break;
         case 2:
-            System.out.println("");
-            System.out.println("Login Mahasiswa");
-            System.out.print("Name: ");
-            nama = scan2.nextLine();
-            System.out.print("Pass: ");
-            pass = scan3.nextLine();
-            cekMahasiswa(nama,pass);
+            cekregistrasim=true;
+            while(cekregistrasim){ //akan di falsekan di method cekMahasiswa 
+                System.out.println("");
+                System.out.println("Login Mahasiswa");
+                System.out.print("Name: ");
+                nama = scan2.nextLine();
+                System.out.print("Pass: ");
+                pass = scan3.nextLine();
+                cekMahasiswa(nama,pass);
+            }
         break;
         case 3:
             menuRegistrasiMahasiswa();
         break;
         case 4:
-            MenuRegistrasiAsisten();
+            menuRegistrasiAsisten();
         break;
         case 5:
             System.exit(0);
@@ -159,83 +173,119 @@ public class ConsoleUI {
             q++;
         }while(q<=app.getnumofAsisten());
         if(cek==true){
+            cekregistrasim=false;
             menuAsisten(b);
         }else{
-            System.out.println("maaf yang anda inputkan salah");
-            menuLogin(1);      
+            System.out.println("Salah !!! cek username dan password");      
         }
     }
-    public void menuAsisten(int i){  
+    public void menuAsisten(int i){
+        
         menua=true;
         while(menua){
-        System.out.print("Asisten ");
-    //    Asisten a1= (Asisten) app.getAsisten(i);
-        System.out.println(app.getAsisten(i).getNama()+" "+app.getAsisten(i).getId());
-        System.out.println("1.Tambah Judul tubes");
-        System.out.println("2.Tambah Mahasiswa");
-        System.out.println("3.Kurangi Mahasiswa");
-        System.out.println("4.Show seluruh tubes dan mahasiswa");
-        System.out.println("5.Log out");
-        System.out.println("Pilihlah : ");
-        pil=scan4.nextInt();
-        switch(pil){
-            case 1:
-                 tambahJudulTubes(i);
-            break;
-            case 2:
-                TambahMahsiswa(i);
-            break;
-            case 3:
-                KurangMahasiswa(i);
-            break;    
-            case 4:
-                show_all(i);
-            break;
-            case 5:
-               menua=false;
-            break;
-            default:
-                System.out.println("maaf pilihan tidak ada");
-                menuAsisten(i);
-            break;
-        }
+            cek2=true;
+            while(cek2){
+                try{
+                System.out.println("");
+                System.out.print("Asisten ");
+                System.out.println(app.getAsisten(i).getNama()+" "+app.getAsisten(i).getId());
+                System.out.println("1.Tambah Judul tubes");
+                System.out.println("2.Tambah Mahasiswa");
+                System.out.println("3.Kurangi Mahasiswa");
+                System.out.println("4.Show seluruh tubes dan mahasiswa");
+                System.out.println("5.Log out");
+                System.out.println("Pilihlah : ");
+                pil=scan4.nextInt();
+                cek2=false;
+                }
+            catch(Exception e){
+                    System.out.println("inputan harus angka");
+                    scan4= new Scanner(System.in);
+            }
+            }    
+            switch(pil){
+                case 1:
+                     tambahJudulTubes(i);
+                break;
+                case 2:
+                    tambahMahsiswa(i);
+                break;
+                case 3:
+                    KurangMahasiswa(i);
+                break;    
+                case 4:
+                    show_all(i);
+                break;
+                case 5:
+                   menua=false;
+                break;
+                default:
+                    System.out.println("maaf pilihan tidak ada");               
+                break;
+            }
+            
+            
         }
     }
-    public void TambahMahsiswa(int i){       
-        c= new String[100];
-        p=0;
-        q=0;
-        r=1;
-        while(app.getAsisten(q)!=null){
-            if(app.getAsisten(q)!=null){
-            do{
-                if(app.getAsisten(q).getTugasBesar(p)!=null){
-                    System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
-                    c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
-                r++;
+    public void tambahMahsiswa(int i){
+        ceklevel2=true;
+        while(ceklevel2){
+            try{
+                c= new String[100];
+                p=0;
+                q=0;
+                r=1;
+                while(app.getAsisten(q)!=null){
+                    if(app.getAsisten(q)!=null){
+                    do{
+                        if(app.getAsisten(q).getTugasBesar(p)!=null){
+                            System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
+                            c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                        r++;
+                        }
+                        p++;
+                    }while(p<app.getAsisten(q).getmaxTugasBesar());
+                    }
+                    p=0;
+                    q++;
                 }
-                p++;
-            }while(p<app.getAsisten(q).getmaxTugasBesar());
+                System.out.print("pilihlah: ");
+                pil=scan4.nextInt();
+                ceklevel2=false;
+                if((pil>r)||(pil<1)){
+                    ceklevel2=true;
+                    System.out.println("tidak ada pilihan");
+                }
+                }catch(Exception e){
+                    System.out.println("Salah!!! cek inputan");
+                    scan4 = new Scanner(System.in); 
             }
-            p=0;
-            q++;
         }
-        System.out.print("pilihlah: ");
-        pil=scan4.nextInt();
-        System.out.println();
-        System.out.print("Nama :");
-        nama = scan5.nextLine();
-        System.out.print("Nim :");
-        nim=scan4.nextInt();
-        System.out.print("umur:");
-        umur=scan4.nextInt();
-        System.out.print("jenis kel:");
-        jeniskel=scan5.nextLine();
+        ceklevel2=true;
+        while(ceklevel2){
+            try{
+                System.out.println();
+                System.out.print("Nama :");
+                nama = scan5.nextLine();
+                System.out.print("Nim :");
+                nim=scan4.nextInt();
+                System.out.print("umur:");
+                umur=scan4.nextInt();
+                System.out.print("jenis kel:");
+                jeniskel=scan5.nextLine();
+                ceklevel2=false;
+                }catch(Exception e){
+                    System.out.println("Salah!!! Inputan harus angka");
+                    scan4 = new Scanner(System.in); 
+            }
+        }
+        cek=false;
         pil=pil-1;
         p=0;
         q=0;
+        z=0;
+        cek1=false;
         while(app.getAsisten(q)!=null){
- //      for(q=0;q<2;q++){
             if(app.getAsisten(q)!=null){
                 do{
                     if(app.getAsisten(q).getTugasBesar(p)!=null){
@@ -243,7 +293,26 @@ public class ConsoleUI {
                           app.getAsisten(q).tambahMahasiswa(c[pil], nama, jeniskel, nim);
                           numofMhs=app.getAsisten(q).getTugasBesar(p).getNumofMahasiswa()-1;
                           app.getAsisten(q).getTugasBesar(p).getMahasiswa(numofMhs).setUmur(umur);
+                           
+                            while(app.getMahasiswa(z)!=null){
+                                if(app.getMahasiswa(z).getNama().equals(nama)){
+                                    if(app.getMahasiswa(z).getId()==nim){
+                                       
+                                        cek1=true;
+                                    }
+                                }
+                                z++;                               
+                            }
+                            if(cek1==false){
+                                   app.addMahasiswa(nama, jeniskel, nim);
+                                   app.getMahasiswa(app.getnumofMahasiswa()-1).setPass(nama);
+                                   System.out.println("Akun mahasiswa ditambah");
+                                   System.out.println("password sama dengan nama");
+                                }
                             System.out.println("Penambahan Mahasiswa Berhasil");
+                         //   f.saveFileAsisten();
+                         //   f.saveFileMahasiswa();
+                            cek=true;
                         }
                     }
                     p++;
@@ -252,51 +321,76 @@ public class ConsoleUI {
             p=0;
             q++;
         }
-        show_all(i);
+        if(cek==false){
+            System.out.println("Penambahan Gagal");
+        }
+        cek=false;
+      // show_all(i);
         System.out.println();
     }
     public void tambahJudulTubes(int i){
-        
-        Asisten a1= (Asisten) app.getAsisten(i);
-        System.out.print("Judul Tubes: ");
-        judul=scan5.nextLine();
-        System.out.print("kuota Anggota: ");
-        maxofMahasiswa=scan4.nextInt();
-        a1.createTugasBesar(judul,maxofMahasiswa);
-        if(a1.getCekCreteTugasBesar()==true){
-            System.out.println("Penambahan Judul Tugas Besar Berhasil");
-        }else{
-            System.out.println("Penambahan Judul Tugas Besar Gagal");
+        cek1=true;
+        while(cek1){
+            try{
+                Asisten a1= (Asisten) app.getAsisten(i);
+                System.out.print("Judul Tubes: ");
+                judul=scan5.nextLine();
+                System.out.print("kuota Anggota: ");
+                maxofMahasiswa=scan4.nextInt();
+                a1.createTugasBesar(judul,maxofMahasiswa);
+                cek1=false;
+                f.saveFileAsisten();
+                if(a1.getCekCreteTugasBesar()==true){
+                    System.out.println("Penambahan Judul Tugas Besar Berhasil");
+                }else{
+                    System.out.println("Penambahan Judul Tugas Besar Gagal");
+                }
+            }catch(Exception e){
+                scan5=new Scanner(System.in);
+            }
         }
     }
     public void KurangMahasiswa(int i){
         c= new String[50];
         n= new String [100];
+        cek2=true;
         
-        Asisten a1= (Asisten) app.getAsisten(i);
-        q=0;
-        p=0;
-        r=1;
-        cek=false;
-        cek1=false;
-        System.out.println("Menu kurangi Mahasiswa");
-        while(app.getAsisten(q)!=null){
-            if(app.getAsisten(q)!=null){
-            do{
-                if(app.getAsisten(q).getTugasBesar(p)!=null){
-                    System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
-                    c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
-                    cek=true;
-                r++;
-                }
-                p++;
-            }while(p<app.getAsisten(q).getmaxTugasBesar());
-            }
+ //       Asisten a1= (Asisten) app.getAsisten(i);
+        while(cek2){
+            q=0;
             p=0;
-            q++;
+            r=1;
+            cek=false;
+            cek1=false;
+            try{
+                System.out.println("Menu kurangi Mahasiswa");
+                while(app.getAsisten(q)!=null){
+                    if(app.getAsisten(q)!=null){
+                    do{
+                        if(app.getAsisten(q).getTugasBesar(p)!=null){
+                            System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
+                            c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                            cek=true;
+                        r++;
+                        }
+                        p++;
+                    }while(p<app.getAsisten(q).getmaxTugasBesar());
+                    }
+                    p=0;
+                    q++;
+                }
+                System.out.print("pilihlah tubes: ");
+                pil=scan4.nextInt();
+                cek2=false;
+                if(pil<1||pil>r){
+                    System.out.println("pilihan tidak ada");
+                    cek2=true;
+                }
+            }catch(Exception e){
+                System.out.println("Inputan harus angka");
+                scan4=new Scanner(System.in);
+            }
         }
-        System.out.print("pilihlah tubes: ");
-        pil=scan4.nextInt();
         pil=pil-1;
         p=0;
         q=0;
@@ -332,14 +426,23 @@ public class ConsoleUI {
             p=0;
             q++;
         }
+        cek2=true;
         if(cek1==false){
             System.out.println("Maaf tidak ada mahasiswa yang terdaftar ");
-            menuAsisten(i);
+            
         }else{
+            while(cek2){
+            try{
             System.out.print("Pilihlah :");
             pil2=scan4.nextInt();
             System.out.println("masukan NIM mahasiswa: ");
             id=scan4.nextInt();
+            cek2=false;
+            }catch(Exception e){
+                System.out.println("inputan salah");
+                scan4= new Scanner(System.in);
+            }
+            }
             pil2=pil2-1;
             p=0;
             q=0;
@@ -366,7 +469,9 @@ public class ConsoleUI {
             p=0;
             q++;
         }
-        show_all(i);
+            f.saveFileAsisten();
+            f.saveFileMahasiswa();
+        //show_all(i);
         if(cek1==false){
             System.out.println("Maaf pengurangan gagal");
         }
@@ -416,11 +521,11 @@ public class ConsoleUI {
             q++;
         }
         if(cek==true){
+            cekregistrasim=false;
             menuMahasiswa(r);
         }else{
             System.out.println("Maaf inputan anda salah");
             
-            menuLogin(2);
         }
     }
     public void menuMahasiswa(int i){
@@ -486,58 +591,79 @@ public class ConsoleUI {
         }
     }
     public void pilih_tubes(int i){
-        System.out.println("");      
-        c = new String[100];        
-        p=0;
-        q=0;
-        r=1;
-        z=0;
-        if(cekMahasiswaTerdaftar(app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getId())==false){
-            System.out.println("pilhan judul tubes");
-            while(app.getAsisten(q)!=null){               
-                do{
-                    if(app.getAsisten(q).getTugasBesar(p)!=null){
-                        System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
-                        System.out.println("    Asprak: "+app.getAsisten(q).getNama());
-                        c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
-                    r++;
-                    }
-                    p++;
-                }while(p<app.getAsisten(q).getmaxTugasBesar());               
+        
+            System.out.println("");      
+            
+            if(cekMahasiswaTerdaftar(app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getId())==false){
+                cek2=true;
+                while(cek2){
+                try{
+                System.out.println("pilhan judul tubes");
+                c = new String[100];        
                 p=0;
-                q++;
-            }
-            System.out.print("pilihlah: ");
-            pil=scan4.nextInt();
-            pil=pil-1;
-        p=0;
-        q=0;
-        while(app.getAsisten(q)!=null){
-            if(app.getAsisten(q)!=null){
-                do{
-                    if(app.getAsisten(q).getTugasBesar(p)!=null){
-                        if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
-                          app.getAsisten(q).tambahMahasiswa(c[pil],app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getjenisKel(),app.getMahasiswa(i).getId());
-                          numofMhs=app.getAsisten(q).getTugasBesar(p).getNumofMahasiswa()-1;
-                          app.getAsisten(q).getTugasBesar(p).getMahasiswa(numofMhs).setUmur(app.getMahasiswa(i).getUmur());
-                            System.out.println("");
-                            System.out.println("terdaftar di: ");
-                            System.out.println("Judul "+app.getAsisten(q).getTugasBesar(p).getJudul());
-                            System.out.println("Asisten "+app.getAsisten(q).getNama());
-                            System.out.println("Anggota ");
-                            while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(z)!=null){
-                                System.out.println(z+1+". " +app.getAsisten(q).getTugasBesar(p).getMahasiswa(z).getNama());
-                                z++;
-                            }
+                q=0;
+                r=1;
+                z=0;
+                while(app.getAsisten(q)!=null){               
+               //     do{
+                        while(app.getAsisten(q).getTugasBesar(p)!=null){
+                            System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
+                            System.out.println("    Asprak: "+app.getAsisten(q).getNama());
+                            c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                        r++;
+                        p++;
                         }
+             //       }while(p<app.getAsisten(q).getmaxTugasBesar());               
+                    p=0;
+                    q++;
+                }
+                System.out.print("pilihlah: ");
+                pil=scan4.nextInt();
+                cek2=false;
+                if(pil<1||pil>r){
+                    System.out.println("Pilihan tidak ada");
+                    cek2=true;
+                }
+            
+                }catch(Exception e){
+                    System.out.println("inputan salah");
+                    scan4=new Scanner(System.in);
+                }
+                }
+                    pil=pil-1;   
+                p=0;
+                q=0;
+                while(app.getAsisten(q)!=null){
+                    if(app.getAsisten(q)!=null){
+                //        do{
+                            while(app.getAsisten(q).getTugasBesar(p)!=null){
+                                if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
+                                  app.getAsisten(q).tambahMahasiswa(c[pil],app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getjenisKel(),app.getMahasiswa(i).getId());
+                                  numofMhs=app.getAsisten(q).getTugasBesar(p).getNumofMahasiswa()-1;
+                                  app.getAsisten(q).getTugasBesar(p).getMahasiswa(numofMhs).setUmur(app.getMahasiswa(i).getUmur());
+                                    System.out.println("");
+                                    System.out.println("terdaftar di: ");
+                                    System.out.println("Judul "+app.getAsisten(q).getTugasBesar(p).getJudul());
+                                    System.out.println("Asisten "+app.getAsisten(q).getNama());
+                                    System.out.println("Anggota ");
+                                    z=0;
+                                    while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(z)!=null){
+                                        System.out.println(z+1+". " +app.getAsisten(q).getTugasBesar(p).getMahasiswa(z).getNama());
+                                        z++;
+                                    }
+                                }
+                                p++;
+                            }
+                //        }while(p<app.getAsisten(q).getmaxTugasBesar());
                     }
-                    p++;
-                }while(p<app.getAsisten(q).getmaxTugasBesar());
+                    p=0;
+                    q++;
+                }
+        }else {
+                System.out.println("Anda sudah terdaftar");
             }
-            p=0;
-            q++;
-        }
-        }
+        f.saveFileAsisten();
+        
     }
     public void lihat_tugasbesar(int i){
         System.out.println("");
@@ -580,6 +706,7 @@ public class ConsoleUI {
         if(cek==false){
             System.out.println("Maaf anda belum terdaftar di Tugas Besar");
         }
+        f.saveFileAsisten();
     }
     public void show_dokumentasi(int i){
         z=0;
@@ -612,21 +739,32 @@ public class ConsoleUI {
         }
     }
     public void menuRegistrasiMahasiswa(){
-        System.out.println("===Registrasi Mahasiswa===");
-        System.out.print("Nama : ");
-        nama = scan2.nextLine();
-        System.out.print("NIM: ");
-        id = scan1.nextInt();
-        System.out.print("Jenis kelamin: ");
-        jeniskel = scan2.nextLine();
-        System.out.print("Umur: ");
-        umur = scan1.nextInt();
-        System.out.print("Password: ");
-        pass = scan2.nextLine();
-        app.addMahasiswa(nama, jeniskel, id);
-        int i=app.getnumofMahasiswa()-1;
-        app.getMahasiswa(i).setUmur(umur);
-        app.getMahasiswa(i).setPass(pass);
+        cekregistrasim=true;
+        while(cekregistrasim){
+            try{
+                System.out.println("===Registrasi Mahasiswa===");
+                System.out.print("Nama : ");
+                nama = scan2.nextLine();
+                System.out.print("NIM: ");
+                id = scan1.nextInt();
+                System.out.print("Jenis kelamin: ");
+                jeniskel = scan2.nextLine();
+                System.out.print("Umur: ");
+                umur = scan1.nextInt();
+                System.out.print("Password: ");
+                pass = scan2.nextLine();
+                app.addMahasiswa(nama, jeniskel, id);
+                i=app.getnumofMahasiswa()-1;
+                app.getMahasiswa(i).setUmur(umur);
+                app.getMahasiswa(i).setPass(pass);
+                cekregistrasim=false;
+                f.saveFileMahasiswa();
+            }catch(Exception e){
+                System.out.println("Salah !!! cek data ");
+                scan1=new Scanner(System.in);
+            }
+        }
+        menuMahasiswa(i);
     }
      public void input(){
       
@@ -660,9 +798,10 @@ public class ConsoleUI {
         app.getMahasiswa(2).setPass("1234");
         app.addMahasiswa("aqli","laki-laki",1301144003);
         app.getMahasiswa(3).setPass("1234");
-     //   app.addMahasiswa("azizah","perempuan",1301144004);
-     //   app.getMahasiswa(4).setPass("1234");
-     //   app.addMahasiswa("dono","laki-laki",1301144005);
-     //   app.getMahasiswa(5).setPass("1234");          
+        app.addMahasiswa("azizah","perempuan",1301144004);
+        app.getMahasiswa(4).setPass("1234");
+        app.addMahasiswa("dono","laki-laki",1301144005);
+        app.getMahasiswa(5).setPass("1234"); 
+          
         }
 }

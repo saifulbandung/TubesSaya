@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controler;
+package Model;
+
+import Controller.ControllerMenuUtama;
 
 
 /**
@@ -14,12 +16,15 @@ public class Driver {
     public static void main(String[] args) {
         // TODO code application logic here
         //input from Asisten
-        Application app = new Application(6,6);
+       
+    /*    Application app = new Application(20,50);
         FileIO f= new FileIO(app);
        // app= f.readFileAsisten();
         ConsoleUI m = new ConsoleUI(app,f);
-        m.menuLog();
+        m.menuLog();*/
      //  f.saveFileAsisten();
      //  f.saveFileMahasiswa(); 
+        ControllerMenuUtama cc = new ControllerMenuUtama();
+     //   ControllerLoginAsisten cl= new ControllerLoginAsisten();
     }
 }

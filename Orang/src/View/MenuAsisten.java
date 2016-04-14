@@ -5,6 +5,9 @@
  */
 package View;
 
+import Controller.ControllerMenuUtama;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author habib
@@ -28,32 +31,32 @@ public class MenuAsisten extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        tambahTubes = new javax.swing.JButton();
+        tambahMahasiswa = new javax.swing.JButton();
+        kurangMahasiswa = new javax.swing.JButton();
+        kembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("ASISTEN");
 
-        jButton1.setText("TAMBAH TUBES");
-        jButton1.setToolTipText("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tambahTubes.setText("TAMBAH TUBES");
+        tambahTubes.setToolTipText("");
+        tambahTubes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tambahTubesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("TAMBAH MAHASISWA");
+        tambahMahasiswa.setText("TAMBAH MAHASISWA");
 
-        jButton3.setText("KURANG MAHASISWA");
+        kurangMahasiswa.setText("KURANG MAHASISWA");
 
-        jButton4.setText("KEMBALI");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        kembali.setText("KEMBALI");
+        kembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                kembaliActionPerformed(evt);
             }
         });
 
@@ -70,16 +73,16 @@ public class MenuAsisten extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(134, 134, 134)
-                                .addComponent(jButton1))
+                                .addComponent(tambahTubes))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(115, 115, 115)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton2))))
+                                    .addComponent(kurangMahasiswa)
+                                    .addComponent(tambahMahasiswa))))
                         .addGap(0, 136, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(kembali)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -88,74 +91,59 @@ public class MenuAsisten extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(36, 36, 36)
-                .addComponent(jButton1)
+                .addComponent(tambahTubes)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(tambahMahasiswa)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(kurangMahasiswa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(kembali)
                 .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void tambahTubesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahTubesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Controller.ControllerMenuUtama cl=new ControllerMenuUtama();
+        this.dispose();
+    }//GEN-LAST:event_tambahTubesActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
         System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuAsisten.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuAsisten.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuAsisten.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuAsisten.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuAsisten().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_kembaliActionPerformed
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton kembali;
+    private javax.swing.JButton kurangMahasiswa;
+    private javax.swing.JButton tambahMahasiswa;
+    private javax.swing.JButton tambahTubes;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the kembali
+     */
+    public Object getKembali() {
+        return kembali;
+    }
+
+    public Object getKurangMahasiswa() {
+        return kurangMahasiswa;
+    }
+
+    public Object getTambahMahasiswa() {
+        return tambahMahasiswa;
+    }
+
+    public Object getTambahTubes() {
+        return tambahTubes;
+    }
+    public void addListener(ActionListener e){
+        
+    }
 }
