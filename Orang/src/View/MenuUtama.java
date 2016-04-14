@@ -12,7 +12,7 @@ import javax.swing.JButton;
  *
  * @author HP
  */
-public class MenuUtama extends javax.swing.JFrame {
+public class MenuUtama extends javax.swing.JFrame implements View {
 
     /**
      * Creates new form MenuUtama
@@ -138,11 +138,12 @@ public class MenuUtama extends javax.swing.JFrame {
         return Keluar;
     }
 
-    public void ActionListioner(ActionListener a) {
-         Login_Asisten.addActionListener(a);
-         Login_Mahasiswa.addActionListener(a);
-         Signup_Asisten.addActionListener(a);
-         Signup_Mahasiswa.addActionListener(a);
+    public void addActionListener(ActionListener e) {
+         Login_Asisten.addActionListener(e);
+         Login_Mahasiswa.addActionListener(e);
+         Signup_Asisten.addActionListener(e);
+         Signup_Mahasiswa.addActionListener(e);
+         Keluar.addActionListener(e);
          
     }
     /**

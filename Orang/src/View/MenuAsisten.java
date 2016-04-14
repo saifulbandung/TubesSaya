@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  *
  * @author habib
  */
-public class MenuAsisten extends javax.swing.JFrame {
+public class MenuAsisten extends javax.swing.JFrame implements View {
 
     /**
      * Creates new form MenuAsisten
@@ -106,12 +106,10 @@ public class MenuAsisten extends javax.swing.JFrame {
 
     private void tambahTubesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahTubesActionPerformed
         // TODO add your handling code here:
-        Controller.ControllerMenuUtama cl=new ControllerMenuUtama();
-        this.dispose();
     }//GEN-LAST:event_tambahTubesActionPerformed
 
     private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
-        System.exit(0);        // TODO add your handling code here:
+       // TODO add your handling code here:
     }//GEN-LAST:event_kembaliActionPerformed
     
     
@@ -143,7 +141,9 @@ public class MenuAsisten extends javax.swing.JFrame {
     public Object getTambahTubes() {
         return tambahTubes;
     }
-    public void addListener(ActionListener e){
-        
+
+    @Override
+    public void addActionListener(ActionListener e) {
+        kembali.addActionListener(e);
     }
 }

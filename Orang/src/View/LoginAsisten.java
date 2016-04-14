@@ -15,7 +15,7 @@ import javax.swing.JButton;
  *
  * @author habib
  */
-public class LoginAsisten extends javax.swing.JFrame {
+public class LoginAsisten extends javax.swing.JFrame implements View {
 
     /**
      * Creates new form LoginAsisten
@@ -200,6 +200,7 @@ public class LoginAsisten extends javax.swing.JFrame {
         return masuk;
     }
 
+    @Override
     public void addActionListener(ActionListener e){
         getKembali().addActionListener(e);
         getMasuk().addActionListener(e);

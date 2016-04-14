@@ -5,10 +5,12 @@
  */
 package View;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author HP
  */
 public interface View {
-    
+    public void addActionListener(ActionListener e);
 }

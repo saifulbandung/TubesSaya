@@ -24,7 +24,8 @@ public class Driver {
         m.menuLog();*/
      //  f.saveFileAsisten();
      //  f.saveFileMahasiswa(); 
-        ControllerMenuUtama cc = new ControllerMenuUtama();
+        Application app = new Application();
+        ControllerMenuUtama cc = new ControllerMenuUtama(app);
      //   ControllerLoginAsisten cl= new ControllerLoginAsisten();
     }
 }
