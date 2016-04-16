@@ -8,7 +8,7 @@ Memiliki Fungsi Sebagi Berikut
 •	Menghapus/mengurangi Mahasiswa
 •	Melihat Tugas Besar beserta Mahasiswa
 
-2.	Mahasiswa
+#2.	Mahasiswa
 •	Memilih Konten Tugas Besar
 •	Menambahkan Dirinya ke dalam Tugas Besar
 •	Menambahkan Dokumentasi ke dalam Tugas Besar
