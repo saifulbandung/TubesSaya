@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package Model;
+import Model.Application;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import Model.Asisten;
+import Model.Asisten;
+import Model.Mahasiswa;
 import Model.Mahasiswa;
 
 public class FileIO {

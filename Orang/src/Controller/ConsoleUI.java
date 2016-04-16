@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
 
+import Model.FileIO;
+import Model.Application;
 import java.util.Scanner;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import Model.Asisten;
 import Model.Asisten;
 
 /**
