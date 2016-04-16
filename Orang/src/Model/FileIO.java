@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controler;
+package Model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -29,19 +29,16 @@ public class FileIO {
     public void saveFileMahasiswa(){
         try(FileOutputStream fmhs = new FileOutputStream("Mahasiswa.txt")){
             ObjectOutputStream omhs = new ObjectOutputStream(fmhs);
-            omhs.writeObject(app.a);
+            omhs.writeObject(app.m);
             omhs.flush();
-            System.out.println("cekkk"+app.getAsisten(0).getNama());
         }catch(Exception e){
             
         }
     }
     public void readFileAsisten(){
-        System.out.println("cekk");
         try(ObjectInputStream oasi= new ObjectInputStream(new FileInputStream("Asisten.txt"))){
             app.a = (Asisten[]) oasi.readObject();
             oasi.close();
-            System.out.println("cekk"+app.getAsisten(0).getNama());
         }catch(Exception e){
         }
         
