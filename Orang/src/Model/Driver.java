@@ -17,15 +17,13 @@ public class Driver {
         // TODO code application logic here
         //input from Asisten
        
-    /*    Application app = new Application(20,50);
+        Application app = new Application(20,50);
         FileIO f= new FileIO(app);
-       // app= f.readFileAsisten();
+        f.readFileAsisten();
+        f.readFileMahasiswa();
         ConsoleUI m = new ConsoleUI(app,f);
-        m.menuLog();*/
-     //  f.saveFileAsisten();
-     //  f.saveFileMahasiswa(); 
-        Application app = new Application();
-        ControllerMenuUtama cc = new ControllerMenuUtama(app);
-     //   ControllerLoginAsisten cl= new ControllerLoginAsisten();
+       // m.menuLog();
+        ControllerMenuUtama cc = new ControllerMenuUtama(app,m,f);
+     
     }
 }

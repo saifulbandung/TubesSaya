@@ -34,7 +34,8 @@ public class MenuAsisten extends javax.swing.JFrame implements View {
         tambahTubes = new javax.swing.JButton();
         tambahMahasiswa = new javax.swing.JButton();
         kurangMahasiswa = new javax.swing.JButton();
-        kembali = new javax.swing.JButton();
+        keluar = new javax.swing.JButton();
+        tampilkan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,10 +54,17 @@ public class MenuAsisten extends javax.swing.JFrame implements View {
 
         kurangMahasiswa.setText("KURANG MAHASISWA");
 
-        kembali.setText("KEMBALI");
-        kembali.addActionListener(new java.awt.event.ActionListener() {
+        keluar.setText("Logout");
+        keluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kembaliActionPerformed(evt);
+                keluarActionPerformed(evt);
+            }
+        });
+
+        tampilkan.setText("Tampilkan TUBES & Mahasiswa");
+        tampilkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tampilkanActionPerformed(evt);
             }
         });
 
@@ -67,37 +75,37 @@ public class MenuAsisten extends javax.swing.JFrame implements View {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(154, 154, 154)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addComponent(tambahTubes))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kurangMahasiswa)
-                                    .addComponent(tambahMahasiswa))))
-                        .addGap(0, 136, Short.MAX_VALUE))
+                        .addGap(115, 115, 115)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tampilkan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(kurangMahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tambahMahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tambahTubes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 96, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(kembali)))
+                        .addComponent(keluar)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(162, 162, 162))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addComponent(tambahTubes)
                 .addGap(18, 18, 18)
                 .addComponent(tambahMahasiswa)
                 .addGap(18, 18, 18)
                 .addComponent(kurangMahasiswa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(kembali)
+                .addGap(18, 18, 18)
+                .addComponent(tampilkan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(keluar)
                 .addGap(25, 25, 25))
         );
 
@@ -108,26 +116,29 @@ public class MenuAsisten extends javax.swing.JFrame implements View {
         // TODO add your handling code here:
     }//GEN-LAST:event_tambahTubesActionPerformed
 
-    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
+    private void keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keluarActionPerformed
        // TODO add your handling code here:
-    }//GEN-LAST:event_kembaliActionPerformed
+    }//GEN-LAST:event_keluarActionPerformed
+
+    private void tampilkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tampilkanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tampilkanActionPerformed
     
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton kembali;
+    private javax.swing.JButton keluar;
     private javax.swing.JButton kurangMahasiswa;
     private javax.swing.JButton tambahMahasiswa;
     private javax.swing.JButton tambahTubes;
+    private javax.swing.JButton tampilkan;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the kembali
-     */
-    public Object getKembali() {
-        return kembali;
+ 
+    public Object getKeluar() {
+        return keluar;
     }
 
     public Object getKurangMahasiswa() {
@@ -141,9 +152,17 @@ public class MenuAsisten extends javax.swing.JFrame implements View {
     public Object getTambahTubes() {
         return tambahTubes;
     }
-
+    public javax.swing.JButton getTampilkan() {
+        return tampilkan;
+    }
     @Override
     public void addActionListener(ActionListener e) {
-        kembali.addActionListener(e);
+        keluar.addActionListener(e);
+        kurangMahasiswa.addActionListener(e);
+        tambahMahasiswa.addActionListener(e);
+        tambahTubes.addActionListener(e);
+        tampilkan.addActionListener(e);
     }
+
+    
 }

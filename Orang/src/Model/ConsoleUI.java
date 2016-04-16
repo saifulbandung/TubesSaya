@@ -29,7 +29,7 @@ public class ConsoleUI {
     private String c[];
     private int nim,umur,numofMhs;
     private int p;
-    private int r;
+    private int r,maxr;
     private String judul;
     private int maxofMahasiswa;
     private String n[];
@@ -57,13 +57,11 @@ public class ConsoleUI {
         this.f=f;
     }
     public void menuLog(){       
-          input();     
-    //    f.readFileMahasiswa();
-    //    f.readFileAsisten();
-        show_all(l);
-    //    f.saveFileAsisten();
-    //    f.saveFileMahasiswa();
-        show_Mahasiswa();
+//        input();     
+//        show_all(l);
+//        f.saveFileAsisten();
+//        f.saveFileMahasiswa();
+//        show_Mahasiswa();
         while(true){
         try{  
             System.out.println("Menu ");
@@ -126,7 +124,10 @@ public class ConsoleUI {
                 System.out.print("Pass: ");
                 pass = scan3.nextLine();
                 System.out.println();
-                cekAsisten(nama,pass);
+                int z =cekAsisten(nama,pass);
+                if(z!=999){
+                    menuAsisten(z);
+                }
             }
         break;
         case 2:
@@ -138,7 +139,10 @@ public class ConsoleUI {
                 nama = scan2.nextLine();
                 System.out.print("Pass: ");
                 pass = scan3.nextLine();
-                cekMahasiswa(nama,pass);
+                int z= cekMahasiswa(nama,pass);
+                if(z!=999){
+                    menuMahasiswa(z);
+                }
             }
         break;
         case 3:
@@ -156,9 +160,9 @@ public class ConsoleUI {
         }
     }
        
-    public void cekAsisten(String nama, String pass){
+    public int cekAsisten(String nama, String pass){
         q=0;
-        b=0;
+        b=999;
         cek=false;
         do{ 
             if(app.getAsisten(q)!=null){
@@ -174,10 +178,11 @@ public class ConsoleUI {
         }while(q<=app.getnumofAsisten());
         if(cek==true){
             cekregistrasim=false;
-            menuAsisten(b);
+        //    menuAsisten(b);
         }else{
             System.out.println("Salah !!! cek username dan password");      
         }
+        return b;
     }
     public void menuAsisten(int i){
         
@@ -486,7 +491,7 @@ public class ConsoleUI {
         while(app.getAsisten(q)!=null){
             while(app.getAsisten(q).getTugasBesar(p)!=null){
                 while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
-                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama()==nama)&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==id)){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(nama))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==id)){
                         cek=true;
                         System.out.println("Sudah Terdaftar : ");
                         System.out.println(app.getAsisten(q).getTugasBesar(p).getJudul());
@@ -507,9 +512,9 @@ public class ConsoleUI {
         }
         return cek;
     }
-    public void cekMahasiswa(String nama,String pass){
+    public int cekMahasiswa(String nama,String pass){
         q=0;
-        r=0;
+        r=999;
         cek=false;
         while(app.getMahasiswa(q)!=null){
             if(app.getMahasiswa(q).getNama().equals(nama)){
@@ -522,11 +527,11 @@ public class ConsoleUI {
         }
         if(cek==true){
             cekregistrasim=false;
-            menuMahasiswa(r);
+       //     menuMahasiswa(r);
         }else{
             System.out.println("Maaf inputan anda salah");
-            
         }
+        return r;
     }
     public void menuMahasiswa(int i){
         menum=true;
@@ -584,16 +589,14 @@ public class ConsoleUI {
     }
     public void show_Mahasiswa(){
         q=0;
-        while(app.getMahasiswa(q)!=null){//***********
+        while(app.getMahasiswa(q)!=null){
             System.out.println("nama"+app.getMahasiswa(q).getNama());
             System.out.println("pass"+app.getMahasiswa(q).getPass());
             q++;
         }
     }
-    public void pilih_tubes(int i){
-        
+    public void pilih_tubes(int i){       
             System.out.println("");      
-            
             if(cekMahasiswaTerdaftar(app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getId())==false){
                 cek2=true;
                 while(cek2){
@@ -605,15 +608,13 @@ public class ConsoleUI {
                 r=1;
                 z=0;
                 while(app.getAsisten(q)!=null){               
-               //     do{
                         while(app.getAsisten(q).getTugasBesar(p)!=null){
                             System.out.println(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul());
                             System.out.println("    Asprak: "+app.getAsisten(q).getNama());
                             c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
                         r++;
                         p++;
-                        }
-             //       }while(p<app.getAsisten(q).getmaxTugasBesar());               
+                        }             
                     p=0;
                     q++;
                 }
@@ -684,7 +685,7 @@ public class ConsoleUI {
         while(app.getAsisten(q)!=null){
             while(app.getAsisten(q).getTugasBesar(p)!=null){
                 while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
-                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama()==app.getMahasiswa(i).getNama())&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(app.getMahasiswa(i).getNama()))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
                    
                         cek=true;
                         System.out.print("nama dokumentasi: ");
@@ -716,7 +717,7 @@ public class ConsoleUI {
         while(app.getAsisten(q)!=null){
             while(app.getAsisten(q).getTugasBesar(p)!=null){
                 while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
-                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama()==app.getMahasiswa(i).getNama())&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(app.getMahasiswa(i).getNama()))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
                    
                         while(app.getAsisten(q).getTugasBesar(p).getDokumentasi(z)!=null){
                             System.out.println("===dokumentasi: "+app.getAsisten(q).getTugasBesar(p).getDokumentasi(z).getNamaDokumentasi()+"===");
@@ -758,6 +759,7 @@ public class ConsoleUI {
                 app.getMahasiswa(i).setUmur(umur);
                 app.getMahasiswa(i).setPass(pass);
                 cekregistrasim=false;
+             //   show_Mahasiswa();
                 f.saveFileMahasiswa();
             }catch(Exception e){
                 System.out.println("Salah !!! cek data ");
@@ -766,42 +768,376 @@ public class ConsoleUI {
         }
         menuMahasiswa(i);
     }
-     public void input(){
+     public String show_pilihan_tubes(){//**************
+         String s ="";
+         c= new String[100];
+                p=0;
+                q=0;
+                r=1;
+                while(app.getAsisten(q)!=null){
+                    if(app.getAsisten(q)!=null){
+                    do{
+                        if(app.getAsisten(q).getTugasBesar(p)!=null){
+                            s=s+(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul())+"\n";
+                            c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                        r++;
+                        }
+                        p++;
+                    }while(p<app.getAsisten(q).getmaxTugasBesar());
+                    }
+                    p=0;
+                    q++;
+                }
+                maxr=r;
+                return s;
+     }
+     public int yang_dipilih_tubes(int pilihan,String nama,int nim,int umur,String jenis_kel){
+        int pil=pilihan-1;//**************/
+        int vv=0;
+        p=0;
+        q=0;
+        z=0;
+        cek1=false;
+        while(app.getAsisten(q)!=null){
+            if(app.getAsisten(q)!=null){
+                do{
+                    if(app.getAsisten(q).getTugasBesar(p)!=null){
+                        if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
+                          app.getAsisten(q).tambahMahasiswa(c[pil], nama, jenis_kel, nim);
+                          numofMhs=app.getAsisten(q).getTugasBesar(p).getNumofMahasiswa()-1;
+                          app.getAsisten(q).getTugasBesar(p).getMahasiswa(numofMhs).setUmur(umur);
+                           vv=1;
+                            while(app.getMahasiswa(z)!=null){
+                                if(app.getMahasiswa(z).getNama().equals(nama)){
+                                    if(app.getMahasiswa(z).getId()==nim){
+                                        
+                                        cek1=true;
+                                    }
+                                }
+                                z++;                               
+                            }
+                            if(cek1==false){
+                                   app.addMahasiswa(nama, jeniskel, nim);
+                                   app.getMahasiswa(app.getnumofMahasiswa()-1).setPass(nama);
+                                   System.out.println("Akun mahasiswa ditambah");
+                                   System.out.println("password sama dengan nama");
+                                   vv=2;
+                                }
+                            System.out.println("Penambahan Mahasiswa Berhasil");
+                            f.saveFileAsisten();
+                            f.saveFileMahasiswa();
+                            cek=true;
+                        }
+                    }
+                    p++;
+                }while(p<app.getAsisten(q).getmaxTugasBesar());
+            }
+            p=0;
+            q++;
+        }
+      return vv;  
+     }
+     public String show_kurang(){
+        c= new String[50];//***************
+        String s="";
+        q=0;
+        p=0;
+        r=1;
+        cek=false;
+            while(app.getAsisten(q)!=null){
+                if(app.getAsisten(q)!=null){
+                do{
+                    if(app.getAsisten(q).getTugasBesar(p)!=null){
+                        s=s+(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul())+"\n";
+                        c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                        cek=true;
+                    r++;
+                    }
+                    p++;
+                }while(p<app.getAsisten(q).getmaxTugasBesar());
+                }
+                p=0;
+                q++;
+            }
+          
+        maxr=r;
+        return s;
+     }
+     public int getMaxr(){
+         return maxr;
+     }
+     public String Show_kurangMahasiswa2(int pilihan){
+        String ss = "";//*****************
+        n= new String [100];
+        pil=pilihan-1;
+        p=0;
+        q=0;
+        r=0;
+        int s=0;
+        int t=0;
+        if(c[pil]!=null){
+            System.out.println("---Judul "+c[pil]+"---");
+            System.out.println("Nama Mahasiswa:");
+        }
+        if(cek==false){
+            System.out.println("maaf belum ada inputan judul tubes");
+            menuAsisten(i);
+        }
+        while(app.getAsisten(q)!=null){ 
+            if(app.getAsisten(q)!=null){
+                do{
+                    if(app.getAsisten(q).getTugasBesar(p)!=null){
+                        if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
+                          while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(s)!=null){
+                              ss=ss+("              "+(t+1)+". "+app.getAsisten(q).getTugasBesar(p).getMahasiswa(s).getNama()+"\n");
+                              
+                              n[t]=app.getAsisten(q).getTugasBesar(p).getMahasiswa(s).getNama();
+                              cek1=true;
+                              t++;
+                              s++;
+                          }
+                          s=0;
+                        }
+                    }
+                    p++;
+                }while(p<app.getAsisten(q).getmaxTugasBesar());
+            }
+            p=0;
+            q++;
+        }
+        if(cek1==false){
+            ss="Maaf Belum ada Mahasiswa";
+        }  
+        maxr=t;
+        return ss;
+     }
+     public boolean show_KurangMahasiswa3(int id,int pil1,int pil22){
+            pil=pil1-1;//****************/
+            pil2=pil22-1;
+            p=0;
+            q=0;
+            int s=0;
+            cek1=false;
+            while(app.getAsisten(q)!=null){
+            if(app.getAsisten(q)!=null){
+                do{
+                    if(app.getAsisten(q).getTugasBesar(p)!=null){
+                        if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
+                          while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(s)!=null){
+                              if(n[pil2]==app.getAsisten(q).getTugasBesar(p).getMahasiswa(s).getNama()){                                 
+                                  app.getAsisten(q).kurangMahasiswa(app.getAsisten(q).getTugasBesar(p).getJudul(),app.getAsisten(q).getTugasBesar(p).getMahasiswa(s).getNama(),id);
+                                  cek1=true;
+                              }
+                              s++;
+                          }
+                          s=0;
+                        }
+                    }
+                    p++;
+                }while(p<app.getAsisten(q).getmaxTugasBesar());
+            }
+            p=0;
+            q++;
+        }
+            f.saveFileAsisten();
+            f.saveFileMahasiswa();
+        return cek1;    
+    }
+     public String getJudul(int i){
+         return c[i-1];
+     }
+    public String pilih_Tubes1(int i){
+        String ss="";//*********
+        if(cekMahasiswaTerdaftar(app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getId())==false){
+            cek2=true;            
+            System.out.println("pilhan judul tubes");
+            c = new String[100];        
+            p=0;
+            q=0;
+            r=1;
+            z=0;
+            while(app.getAsisten(q)!=null){               
+                    while(app.getAsisten(q).getTugasBesar(p)!=null){
+                        ss=ss+(r+". "+app.getAsisten(q).getTugasBesar(p).getJudul()+"\n");
+                        ss=ss+("    Asprak: "+app.getAsisten(q).getNama())+"\n";
+                        c[r-1]=app.getAsisten(q).getTugasBesar(p).getJudul();
+                    r++;
+                    p++;
+                    }             
+                p=0;
+                q++;
+            }  
+        }
+        maxr=r;
+        return ss;
+    }
+    public void pilih_tubes2(int pilihan){
+        pil=pilihan-1;//****************   
+        p=0;
+        q=0;
+        while(app.getAsisten(q)!=null){
+            if(app.getAsisten(q)!=null){
+                    while(app.getAsisten(q).getTugasBesar(p)!=null){
+                        if(c[pil]==app.getAsisten(q).getTugasBesar(p).getJudul()){
+                          app.getAsisten(q).tambahMahasiswa(c[pil],app.getMahasiswa(i).getNama(),app.getMahasiswa(i).getjenisKel(),app.getMahasiswa(i).getId());
+                          numofMhs=app.getAsisten(q).getTugasBesar(p).getNumofMahasiswa()-1;
+                          app.getAsisten(q).getTugasBesar(p).getMahasiswa(numofMhs).setUmur(app.getMahasiswa(i).getUmur());
+                            System.out.println("");
+                            System.out.println("terdaftar di: ");
+                            System.out.println("Judul "+app.getAsisten(q).getTugasBesar(p).getJudul());
+                            System.out.println("Asisten "+app.getAsisten(q).getNama());
+                            System.out.println("Anggota ");
+                            z=0;
+                            while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(z)!=null){
+                                System.out.println(z+1+". " +app.getAsisten(q).getTugasBesar(p).getMahasiswa(z).getNama());
+                                z++;
+                            }
+                        }
+                        p++;
+                    }
+            }
+            p=0;
+            q++;
+        }
+        f.saveFileAsisten();
+        f.saveFileMahasiswa();
+    }
+    public String show_TubesTerdaftar(String nama,int id){
+        String ss="";//***********
+        z=0;
+        q=0;
+        p=0;
+        r=0;
+        cek=false;
+        while(app.getAsisten(q)!=null){
+            while(app.getAsisten(q).getTugasBesar(p)!=null){
+                while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(nama))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==id)){
+                        cek=true;
+                        ss="Sudah Terdaftar : ";
+                        ss=ss+(app.getAsisten(q).getTugasBesar(p).getJudul()+"\n");
+                        ss=ss+("Asisten "+app.getAsisten(q).getNama())+"\n";
+                        ss=ss+("Anggota")+"\n";
+                        while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(z)!=null){
+                            ss=ss+("    " +app.getAsisten(q).getTugasBesar(p).getMahasiswa(z).getNama())+"\n";
+                            z++;
+                        }
+                    }
+                    r++;
+                }
+                r=0;
+                p++;
+            }
+            p=0;
+            q++;
+        }
+        return ss;
+    }
+    public boolean buatDokumentasi(int i,String nama,String isi1){ 
+        tanggal = new Date();//*************
+        z=0;
+        q=0;
+        p=0;
+        r=0;
+        cek=false;
+        ad= new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println("");
+        System.out.println("---Menu dokumentasi---");
+        while(app.getAsisten(q)!=null){
+            while(app.getAsisten(q).getTugasBesar(p)!=null){
+                while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(app.getMahasiswa(i).getNama()))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
+                        cek=true;
+                        System.out.print("nama dokumentasi: ");
+                        namaDokumentasi = nama;
+                        System.out.println("tanggal tgl-bln-th: "+(ad.format(tanggal)));
+                        System.out.print("isi: ");
+                        isi = isi1;
+                        app.getAsisten(q).getTugasBesar(p).createDokumentasi(namaDokumentasi, tanggal, isi);                      
+                    }
+                    r++;
+                }
+                r=0;
+                p++;
+            }
+            p=0;
+            q++;
+        }
+        f.saveFileAsisten();
+        f.saveFileMahasiswa();
+        return cek;
+    }
+    public Date getTanggal(){
+        tanggal = new Date();
+        ad= new SimpleDateFormat("dd-MM-yyyy");
+        return tanggal;
+    }
+    public String tamplikanDokumentasi(int i){
+        String ss = "";
+        z=0;
+        q=0;
+        p=0;
+        r=0;
+        ad= new SimpleDateFormat("dd-MM-yyyy");
+        while(app.getAsisten(q)!=null){
+            while(app.getAsisten(q).getTugasBesar(p)!=null){
+                while(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r)!=null){
+                    if((app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getNama().equals(app.getMahasiswa(i).getNama()))&&(app.getAsisten(q).getTugasBesar(p).getMahasiswa(r).getId()==app.getMahasiswa(i).getId())){
+                   
+                        while(app.getAsisten(q).getTugasBesar(p).getDokumentasi(z)!=null){
+                            ss=ss+("===dokumentasi: "+app.getAsisten(q).getTugasBesar(p).getDokumentasi(z).getNamaDokumentasi()+"===")+"\n";
+                            ss=ss+("Tanggal: "+ad.format(app.getAsisten(q).getTugasBesar(p).getDokumentasi(z).getTanggal()))+"\n";
+                            ss=ss+("Isi: "+app.getAsisten(q).getTugasBesar(p).getDokumentasi(z).getIsi())+"\n";
+                            z++;
+                        }
+                    }
+                    r++;
+                    
+                }
+                r=0;
+                p++;
+            }
+            p=0;
+            q++;
+        }
+        return ss;
+    }
+    public void input(){
       
-        app.addAsisten("ahmad","laki-laki",19,5);
-        Asisten p1=(Asisten) app.getAsisten(0);        
-        p1.setId(1301144242);
-        p1.setPass("1234");
-        p1.createTugasBesar("sistem igracias",5); // create Tugas besar from asisten
-        p1.createTugasBesar("aplikasi inventaris",5);// create Tugas besar from asisten
-        p1.tambahMahasiswa("sistem igracias","akhmad saifullah","laki-laki",1301144242);//tambah mahasiswa from asisten
-        p1.getTugasBesar(0).getMahasiswa(0).setUmur(20);
-        p1.tambahMahasiswa("sistem igracias","dani","laki-laki",1301144002);
-        p1.getTugasBesar(0).getMahasiswa(1).setUmur(19);
-        p1.tambahMahasiswa("aplikasi inventaris","aqli","laki-laki",1301144003);
-        p1.getTugasBesar(1).getMahasiswa(0).setUmur(15);
-        System.out.println();
-        app.addAsisten("Fatimah","perempuan",19,5);
-        Asisten p2=(Asisten) app.getAsisten(1);        
-        p2.setId(1301144242);
-        p2.setPass("1234");
-        p2.createTugasBesar("sistem informasi",5); // create Tugas besar from asisten
-        p2.createTugasBesar("aplikasi perpustakaan",5);// create Tugas besar from asisten
-        p2.tambahMahasiswa("aplikasi perpustakaan","azizah","perempuan",1301144004);
-        p2.getTugasBesar(1).getMahasiswa(0).setUmur(18);
-        //input Mahasiswa
-        app.addMahasiswa("habib","laki-laki",1301144001);
-        app.getMahasiswa(0).setPass("1234");
-        app.addMahasiswa("akhmad saifullah","laki-laki",1301144242);
-        app.getMahasiswa(1).setPass("1234");
-        app.addMahasiswa("dani","laki-laki",1301144002);
-        app.getMahasiswa(2).setPass("1234");
-        app.addMahasiswa("aqli","laki-laki",1301144003);
-        app.getMahasiswa(3).setPass("1234");
-        app.addMahasiswa("azizah","perempuan",1301144004);
-        app.getMahasiswa(4).setPass("1234");
-        app.addMahasiswa("dono","laki-laki",1301144005);
-        app.getMahasiswa(5).setPass("1234"); 
+//        app.addAsisten("ahmad","laki-laki",19,5);
+//        Asisten p1=(Asisten) app.getAsisten(0);        
+//        p1.setId(1301144242);
+//        p1.setPass("1234");
+//        p1.createTugasBesar("sistem igracias",5); // create Tugas besar from asisten
+//        p1.createTugasBesar("aplikasi inventaris",5);// create Tugas besar from asisten
+//        p1.tambahMahasiswa("sistem igracias","akhmad saifullah","laki-laki",1301144242);//tambah mahasiswa from asisten
+//        p1.getTugasBesar(0).getMahasiswa(0).setUmur(20);
+//        p1.tambahMahasiswa("sistem igracias","dani","laki-laki",1301144002);
+//        p1.getTugasBesar(0).getMahasiswa(1).setUmur(19);
+//        p1.tambahMahasiswa("aplikasi inventaris","aqli","laki-laki",1301144003);
+//        p1.getTugasBesar(1).getMahasiswa(0).setUmur(15);
+//        System.out.println();
+//        app.addAsisten("Fatimah","perempuan",19,5);
+//        Asisten p2=(Asisten) app.getAsisten(1);        
+//        p2.setId(1301144242);
+//        p2.setPass("1234");
+//        p2.createTugasBesar("sistem informasi",5); // create Tugas besar from asisten
+//        p2.createTugasBesar("aplikasi perpustakaan",5);// create Tugas besar from asisten
+//        p2.tambahMahasiswa("aplikasi perpustakaan","azizah","perempuan",1301144004);
+//        p2.getTugasBesar(1).getMahasiswa(0).setUmur(18);
+//        //input Mahasiswa
+//        app.addMahasiswa("habib","laki-laki",1301144001);
+//        app.getMahasiswa(0).setPass("1234");
+//        app.addMahasiswa("akhmad saifullah","laki-laki",1301144242);
+//        app.getMahasiswa(1).setPass("1234");
+//        app.addMahasiswa("dani","laki-laki",1301144002);
+//        app.getMahasiswa(2).setPass("1234");
+//        app.addMahasiswa("aqli","laki-laki",1301144003);
+//        app.getMahasiswa(3).setPass("1234");
+//        app.addMahasiswa("azizah","perempuan",1301144004);
+//        app.getMahasiswa(4).setPass("1234");
+//        app.addMahasiswa("dono","laki-laki",1301144005);
+//        app.getMahasiswa(5).setPass("1234"); 
           
         }
 }
